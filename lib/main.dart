@@ -1,4 +1,4 @@
-import 'package:app/features/auth/login_screen.dart';
+import 'package:app/config/app_routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,12 +12,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey: NavigationService.navigatorKey,
-      home: const LoginScreen(),
+      initialRoute: '/login',
+      onGenerateRoute: AppRoutes.onGenerateRoute,
+      routes: AppRoutes.routes,
     );
   }
-}
-
-class NavigationService {
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 }
