@@ -15,16 +15,36 @@ class AppRoutes {
     if (settings.name == '/main') {
       return MaterialPageRoute(
         builder: (context) {
-          _routeGuard.guardRoute(context, 'main');
-          return Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
+          return FutureBuilder<bool>(
+            future: _routeGuard.isLoggedIn(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Scaffold(
+                  body: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+
+              if (snapshot.hasData && snapshot.data == true) {
+                return MainPage();
+              }
+
+              return LoginScreen();
+            },
           );
         },
       );
     }
 
-    return MaterialPageRoute(builder: routes[settings.name]!);
+    if (routes.containsKey(settings.name)) {
+      return MaterialPageRoute(builder: routes[settings.name]!);
+    }
+
+    return MaterialPageRoute(
+      builder: (context) => Scaffold(
+        body: Center(child: Text('404 - Page not found')),
+      ),
+    );
   }
 }

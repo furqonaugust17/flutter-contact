@@ -16,7 +16,7 @@ class RouteGuard {
       Navigator.pushNamed(context, routeName);
     } else {
       if (!context.mounted) return;
-      Navigator.pushReplacementNamed(context, '/loigin');
+      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 }
