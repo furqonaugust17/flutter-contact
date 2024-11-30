@@ -1,14 +1,19 @@
 import 'package:app/config/route_guard.dart';
 import 'package:app/features/auth/login_screen.dart';
+import 'package:app/features/main/main_controller.dart';
 import 'package:app/features/main/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppRoutes {
   static final RouteGuard _routeGuard = RouteGuard();
 
   static Map<String, WidgetBuilder> routes = {
     '/login': (context) => LoginScreen(),
-    '/main': (context) => MainPage(),
+    '/main': (context) => ChangeNotifierProvider(
+          create: (context) => MainController(),
+          child: MainPage(),
+        ),
   };
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {

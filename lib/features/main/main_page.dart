@@ -12,20 +12,16 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainController = Provider.of<MainController>(context);
-    return ChangeNotifierProvider(
-      create: (context) => MainController(),
-      child: Scaffold(
-        body: _pages[mainController.currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: mainController.currentIndex,
-            onTap: (value) => mainController.setIndex,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Address'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: 'Contact'),
-            ]),
-      ),
+    return Scaffold(
+      body: _pages[mainController.currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: mainController.currentIndex,
+          onTap: (value) => mainController.setIndex(value),
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Address'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Contact'),
+          ]),
     );
   }
 }

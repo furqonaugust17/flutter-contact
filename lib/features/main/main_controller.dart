@@ -6,6 +6,7 @@ class MainController extends ChangeNotifier {
   int get currentIndex => _currentIndex;
 
   void setIndex(int index) {
+    print(index);
     _currentIndex = index;
     notifyListeners();
   }
